@@ -2,7 +2,7 @@
 <div class="container">
     <div class="folder-grid">
         {{ range .Pages }}
-            <a href="{{ .RelPermalink | absURL }}" class="card-link">
+            <a href="{{ .Permalink }}" class="card-link">
                 <div class="card">
                     {{/* Get all images, then filter out the thumbnail to see what's left. */}}
                     {{ $allImages := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
