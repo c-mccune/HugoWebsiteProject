@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div class="container">
+    <div class="folder-grid">
+        {{ range .Pages }}
+            <a href="{{ .Permalink }}" class="card-link">
+                <div class="card">
+                    {{/* Try to find thumbnail.png specifically, otherwise fall back to the first image. */}}
+                    {{ $thumbnail := .Resources.GetMatch "thumbnail.png" }}
+                    {{ if not $thumbnail }}
+                        {{ $thumbnail = (.Resources.Match "**.{jpg,jpeg,png,gif,svg}").First }}
+                    {{ end }}
+
+                    {{ with $thumbnail }}
+                        <img src="{{ .Permalink }}" alt="{{ .Name }}">
+                    {{ end }}
+                    
+                    <div class="card-info">
+                        <h2>{{ .Title }}</h2>
+                        {{/* Exclude the thumbnail from the image count */}}
+                        {{ $images := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
+                        {{ $imagesWithoutThumbnail := where $images "Name" "ne" "thumbnail.png" }}
+                        <p>{{ len $imagesWithoutThumbnail }} images</p>
+                    </div>
+                </div>
+            </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }} 

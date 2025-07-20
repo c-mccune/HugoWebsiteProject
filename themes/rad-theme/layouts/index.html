@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="slider">
+    <div class="slide-track">
+        {{ $allImages := slice }}
+        {{ range (site.GetPage "folders").Pages }}
+            {{ $folderImages := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
+            {{ $allImages = union $allImages $folderImages }}
+        {{ end }}
+        {{ range $allImages }}
+            <div class="slide" style="background-image: url('{{ .Permalink }}');"></div>
+        {{ end }}
+    </div>
+</div>
+
+<div class="home-content container">
+    <h1>{{ .Site.Title }}</h1>
+    <p>A curated collection of visual inspiration.</p>
+</div>
+{{ end }} 

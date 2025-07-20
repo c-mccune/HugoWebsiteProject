@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Garet:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    {{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ "/favicon.svg" | relURL }}" type="image/svg+xml">
+</head>
+<body>
+    {{ partial "nav.html" . }}
+    
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ block "footer" . }}{{ end }}
+
+    {{ $slider := resources.Get "js/slider.js" | minify | fingerprint }}
+    <script src="{{ $slider.Permalink }}" integrity="{{ $slider.Data.Integrity }}"></script>
+</body>
+</html> 

@@ -1,0 +1,43 @@
+{
+  "htmlElements": {
+    "tags": [
+      "a",
+      "body",
+      "div",
+      "h1",
+      "h2",
+      "head",
+      "html",
+      "img",
+      "link",
+      "main",
+      "meta",
+      "nav",
+      "p",
+      "path",
+      "script",
+      "span",
+      "svg",
+      "title"
+    ],
+    "classes": [
+      "card",
+      "card-info",
+      "card-link",
+      "container",
+      "folder-grid",
+      "hamburger",
+      "home-content",
+      "logo",
+      "masonry-gallery",
+      "nav",
+      "nav-center",
+      "nav-links",
+      "nav-right",
+      "slide",
+      "slide-track",
+      "slider"
+    ],
+    "ids": null
+  }
+}

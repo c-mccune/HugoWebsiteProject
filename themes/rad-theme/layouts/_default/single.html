@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="container">
+    <h1 style="text-align: center; margin-bottom: 2rem;">{{ .Title }}</h1>
+    <div class="masonry-gallery">
+        {{/* Exclude the thumbnail from the gallery view */}}
+        {{ $images := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
+        {{ $imagesWithoutThumbnail := where $images "Name" "ne" "thumbnail.png" }}
+        {{ range $imagesWithoutThumbnail }}
+            <a href="{{ .Permalink }}" target="_blank">
+                <img src="{{ .Permalink }}" alt="{{ .Name }}">
+            </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }} 
