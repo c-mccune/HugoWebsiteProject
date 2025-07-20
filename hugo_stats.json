@@ -14,10 +14,8 @@
       "meta",
       "nav",
       "p",
-      "path",
       "script",
       "span",
-      "svg",
       "title"
     ],
     "classes": [
@@ -28,7 +26,6 @@
       "folder-grid",
       "hamburger",
       "home-content",
-      "logo",
       "logo-text",
       "masonry-gallery",
       "nav",

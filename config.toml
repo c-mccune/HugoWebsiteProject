@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
-title = "RAD Reads Collections"
+title = "CCM's DesignFeed"
 theme = "rad-theme"
 enableGitInfo = true
 

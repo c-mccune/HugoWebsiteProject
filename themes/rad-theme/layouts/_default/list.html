@@ -4,22 +4,28 @@
         {{ range .Pages }}
             <a href="{{ .Permalink }}" class="card-link">
                 <div class="card">
-                    {{/* Try to find thumbnail.png specifically, otherwise fall back to the first image. */}}
-                    {{ $thumbnail := .Resources.GetMatch "thumbnail.png" }}
-                    {{ if not $thumbnail }}
-                        {{ $thumbnail = (.Resources.Match "**.{jpg,jpeg,png,gif,svg}").First }}
+                    {{/* Get all images, then filter out the thumbnail to see what's left. */}}
+                    {{ $allImages := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
+                    {{ $contentImages := where $allImages "Name" "ne" "thumbnail.png" }}
+                    
+                    {{/* Use the first content image if available, otherwise use the thumbnail. */}}
+                    {{ $thumbnail := "" }}
+                    {{ if gt (len $contentImages) 0 }}
+                        {{ $thumbnail = index $contentImages 0 }}
+                    {{ else }}
+                        {{ $thumbnail = .Resources.GetMatch "thumbnail.png" }}
                     {{ end }}
 
                     {{ with $thumbnail }}
-                        <img src="{{ .Permalink }}" alt="{{ .Name }}">
+                        {{/* Process the image to be a 300x300 square thumbnail, cropping as needed */}}
+                        {{ $croppedThumb := .Fill "300x300" }}
+                        <img src="{{ $croppedThumb.Permalink }}" alt="{{ .Name }}">
                     {{ end }}
                     
                     <div class="card-info">
                         <h2>{{ .Title }}</h2>
-                        {{/* Exclude the thumbnail from the image count */}}
-                        {{ $images := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
-                        {{ $imagesWithoutThumbnail := where $images "Name" "ne" "thumbnail.png" }}
-                        <p>{{ len $imagesWithoutThumbnail }} images</p>
+                        {{/* The image count should only be for content images. */}}
+                        <p>{{ len $contentImages }} images</p>
                     </div>
                 </div>
             </a>
