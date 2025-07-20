@@ -53,4 +53,4 @@ The site is configured to automatically deploy to GitHub Pages when you push to 
 
 1.  Create a new repository on GitHub.
 2.  Follow the instructions to push your local repository to GitHub.
-3.  In your repository settings on GitHub, go to `Pages` and make sure the source is set to `Deploy from a branch` and the branch is `gh-pages`. 
+3.  In your repository settings on GitHub, go to `Pages` and make sure the source is set to `Deploy from a branch` and the branch is `gh-pages`. Note: The deployment is handled automatically by the GitHub Actions workflow. 
