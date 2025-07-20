@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="container">
+    <div class="folder-grid">
+        {{ range .Pages }}
+            <a href="{{ .Permalink }}" class="card-link">
+                <div class="card">
+                    {{/* Get all images, then filter out the thumbnail to see what's left. */}}
+                    {{ $allImages := .Resources.Match "**.{jpg,jpeg,png,gif,svg}" }}
+                    {{ $images := (where $allImages "name" "!=" "thumbnail.jpg") }}
+                    {{ $image := index $images 0 }}
+                    {{ if $image }}
+                        <img src="{{ $image.Permalink }}" alt="{{ .Title }}">
+                    {{ else }}
+                        <div class="card-content">
+                            <h3>{{ .Title }}</h3>
+                            <p>{{ .Description }}</p>
+                        </div>
+                    {{ end }}
+                </div>
+            </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }} 
